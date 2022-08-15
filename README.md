@@ -1,4 +1,4 @@
-- 👋 Hi, I’m Elias
+- 👋 Hi, I’m Ace
 - 👀 I’m interested in just learning to code for now.
 - 🌱 I’m currently learning Python, Tkinter.
 - 💞️ I’m looking to collaborate on ...
