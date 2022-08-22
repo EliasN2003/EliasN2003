@@ -3,10 +3,17 @@
 
 import random
 
-print("Welcome to the number guessing game")
-difficulty = input("Select difficulty: Very easy (v), Easy (e), Medium (m), Hard (h)\n")
 rounds = 0
 score = 0
+
+
+def restart():      # Restarts the game after a game over or because of invalid input
+    global rounds
+    rounds = 0      # Clears the saved rounds
+    global score
+    score = 0       # Clears the saved score
+    start()
+    return
 
 
 def guessing_game_very_easy():      # This is the very easy mode
@@ -14,9 +21,8 @@ def guessing_game_very_easy():      # This is the very easy mode
     rounds = rounds + 1     # Counts the rounds in the game
     print("\nRound " + str(rounds) + ":")
 
-    # Chooses x amount of random numbers depending on the difficulty.
     numbers = range(30)
-    chosen_numbers = random.sample(numbers, 2)
+    chosen_numbers = random.sample(numbers, 2)      # Chooses x amount of random numbers depending on the difficulty.
     print(chosen_numbers)
     secret_number = random.choice(chosen_numbers)
     guess = input("\nGuess the number:\n")
@@ -28,9 +34,12 @@ def guessing_game_very_easy():      # This is the very easy mode
 
     else:
         print("Wrong!")
-        print("\n\nGame Over")
+        print("\nGame Over")        # Game over message
         print("You scored: " + str(score))
-        input("")
+        if input("\nPlay again? (y)\n>>> ") == "y":     # Option to play again after game over
+            restart()
+        else:
+            return
 
 
 def guessing_game_easy():       # This is the easy mode
@@ -52,7 +61,11 @@ def guessing_game_easy():       # This is the easy mode
         print("Wrong!")
         print("\n\nGame Over")
         print("You scored: " + str(score))
-        input("")
+        if input("\nPlay again? (y)\n>>> ") == "y":     # Option to play again after game over
+            restart()
+        else:
+            return
+
 
 
 def guessing_game_medium():         # This is the medium difficulty
@@ -74,7 +87,10 @@ def guessing_game_medium():         # This is the medium difficulty
         print("Wrong!")
         print("\n\nGame Over")
         print("You scored: " + str(score))
-        input("")
+        if input("\nPlay again? (y)\n>>> ") == "y":  # Option to play again after game over
+            restart()
+        else:
+            return
 
 
 def guessing_game_hard():           # This is the hard difficulty
@@ -96,22 +112,34 @@ def guessing_game_hard():           # This is the hard difficulty
         print("Wrong!")
         print("\n\nGame Over")
         print("You scored: " + str(score))
-        input("")
+        if input("\nPlay again? (y)\n>>> ") == "y":  # Option to play again after game over
+            restart()
+        else:
+            return
 
 
 # Selects the difficulty of the game
-if difficulty.lower() == "v":
-    guessing_game_very_easy()
+def start():
+    print("Welcome to the number guessing game")
+    difficulty = input("Select difficulty: Very easy (v), Easy (e), Medium (m), Hard (h)\n>>> ")
 
-elif difficulty.lower() == "e":
-    guessing_game_easy()
+    if difficulty.lower() == "v":
+        guessing_game_very_easy()
 
-elif difficulty.lower() == "m":
-    guessing_game_medium()
+    elif difficulty.lower() == "e":
+        guessing_game_easy()
 
-elif difficulty.lower() == "h":
-    guessing_game_hard()
+    elif difficulty.lower() == "m":
+        guessing_game_medium()
 
-    # Prints error in case of wrong input
-else:
-    print("Please enter a valid answer")
+    elif difficulty.lower() == "h":
+        guessing_game_hard()
+
+        # Prints error in case of wrong input and asks for input again
+    else:
+        print("\nPlease enter a valid answer\n")
+        restart()
+        return
+
+
+start()
